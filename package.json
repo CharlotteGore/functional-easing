@@ -1,6 +1,6 @@
 {
   "name": "functional-easing",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Abstracted functional easing provider, based on Penner's equations.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,6 @@
     "url": "git@github.com:charlottegore/functional-easing"
   },
   "dependencies": {
-    "gm-bezier": "1.4.0",
     "gm-is": "~1.2.2"
   },
   "keywords": [
