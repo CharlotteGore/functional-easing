@@ -54,7 +54,7 @@ var fns = {
   },
   'in-out-quint' : function (t){
     t = t / 2;
-    return (t * t * t * t * t) / 2; 
+    return (t * t * t * t * t) / 2;
   },
   'in-sine' : function (t){
     return -1 * Math.cos(t * (Math.PI / 2)) + 1;
@@ -84,7 +84,7 @@ var fns = {
   },
   'in-out-circ' : function (t){
     t = t / 2;
-    return (Math.sqrt(1 - t * t) - 1) / -2
+    return (Math.sqrt(1 - t * t) - 1) / -2;
   },
   'in-back' : function (t, overshoot){
     if (!overshoot && overshoot !== 0){
@@ -94,14 +94,14 @@ var fns = {
   },
   'out-back' : function (t, overshoot){
     if(!overshoot && overshoot !== 0){
-       overshoot = 1.70158;            
+      overshoot = 1.70158;
     }
     t = t - 1;
-    return t * t * ((overshoot + 1) * t + overshoot) + 1; 
+    return t * t * ((overshoot + 1) * t + overshoot) + 1;
   },
   'in-out-back' : function (t, overshoot){
     if(!overshoot && overshoot !== 0){
-      overshoot = 1.70158;            
+      overshoot = 1.70158;
     }
     t = t / 2;
     overshoot = overshoot * 1.525;
@@ -115,26 +115,26 @@ var fns = {
       return 7.5625 * t * t;
     } else if (t < 0.7272727272727273) {
       t = t - 0.5454545454545454;
-      return 7.5625 * t * t + .75;
+      return 7.5625 * t * t + 0.75;
     } else if (t < 0.9090909090909091) {
       t = t - 0.8181818181818182;
-      return 7.5625 * t * t + .9375;
+      return 7.5625 * t * t + 0.9375;
     } else {
       t = t - 0.9545454545454546;
-      return 7.5625 * t * t + .984375;
+      return 7.5625 * t * t + 0.984375;
     }
   },
   'in-out-bounce' : function (t){
     if (t < 0.5){
-      return inBounce (t*2) * .5;
+      return inBounce (t*2) * 0.5;
     }
-    return outBounce ( t*2-1 ) * .5 + 1 * .5;
+    return outBounce ( t*2-1 ) * 0.5 + 1 * 0.5;
   },
   'in-elastic' : function (t, amplitude, period){
     var offset;
     // escape early for 0 and 1
     if (t === 0 || t === 1) {
-      return t; 
+      return t;
     }
     if (!period){
       period = 0.3;
@@ -152,7 +152,7 @@ var fns = {
     var offset;
     // escape early for 0 and 1
     if (t === 0 || t === 1) {
-      return t; 
+      return t;
     }
     if (!period){
       period = 0.3;
@@ -170,7 +170,7 @@ var fns = {
     t = (t / 2) - 1;
     // escape early for 0 and 1
     if (t === 0 || t === 1) {
-      return t; 
+      return t;
     }
     if (!period){
       period = 0.44999999999999996;
@@ -183,7 +183,7 @@ var fns = {
     }
     return (amplitude * Math.pow(2, 10 * t) * Math.sin((t - offset) * (Math.PI * 2) / period )) / -2;
   }
-}
+};
 
 outBounce = fns['out-bounce'];
 inBounce = fns['in-bounce'];
