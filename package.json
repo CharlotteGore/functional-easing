@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:charlottegore/animation-easing"
+    "url": "git@github.com:charlottegore/functional-easing"
   },
   "dependencies": {
     "gm-bezier": "1.4.0",
@@ -47,6 +47,6 @@
   "author": "Charlotte Gore <charlotte@greenmesa.co.uk>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/charlottegore/animation-easing/issues"
+    "url": "https://github.com/charlottegore/functional-easing/issues"
   }
 }

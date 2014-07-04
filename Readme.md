@@ -55,7 +55,8 @@ var animation = new AnimationTimer()
     // every tick, this function will be called and 'time' will be already 'eased'
     var tweenedVector = Vector2D.lerp(origin, destination, time);
     // do something with the vector...
-  }));
+  }))
+  .play();
 
 ```
 
