@@ -1,0 +1,52 @@
+{
+  "name": "functional-easing",
+  "version": "1.0.0",
+  "description": "Abstracted functional easing provider, based on Penner's equations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:charlottegore/animation-easing"
+  },
+  "dependencies": {
+    "gm-bezier": "1.4.0",
+    "gm-is": "~1.2.2"
+  },
+  "keywords": [
+    "animation",
+    "easing",
+    "penner",
+    "functional",
+    "callback",
+    "abstract",
+    "generic",
+    "cubic",
+    "sinusoidal",
+    "circular",
+    "exponential",
+    "bounce",
+    "elastic",
+    "back",
+    "quad",
+    "quart",
+    "quint",
+    "browser"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-browserify": "~1.3.0",
+    "grunt-mocha-test": "~0.11.0",
+    "grunt-mocha-phantomjs": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "chai": "~1.9.0",
+    "mocha": "~1.17.1"
+  },
+  "author": "Charlotte Gore <charlotte@greenmesa.co.uk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charlottegore/animation-easing/issues"
+  }
+}
