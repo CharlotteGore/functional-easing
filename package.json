@@ -1,6 +1,6 @@
 {
   "name": "functional-easing",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Abstracted functional easing provider, based on Penner's equations.",
   "main": "index.js",
   "scripts": {
@@ -46,12 +46,15 @@
   "testling" : {
     "harness" : "mocha-bdd",
     "files" : "test/test.js",
-    "browsers" : [
-      "ie8", "ie9", "ie10", "ie11",
-      "ff/latest", "ff/nightly",
-      "chrome/latest", "chrome/canary",
-      "opera/latest", "opera/next",
-      "safari/latest"
+    "browsers": [
+      "ie/6..latest",
+      "chrome/22..latest",
+      "firefox/16..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/latest"
     ]
   },
   "author": "Charlotte Gore <charlotte@greenmesa.co.uk>",

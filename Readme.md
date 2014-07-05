@@ -175,6 +175,51 @@ var easingFunction = easer(function(t){
 easingFunction(0.5); // 1
 ```
 
+## Credits
+
+All easing functions were refactored using information from [Robert Penner's easing website](http://www.robertpenner.com/easing/), Actionscript code from [Gizma](http://gizma.com/easing/) and Elastic/Back and Bounce code from [dZone](http://www.dzone.com/snippets/robert-penner-easing-equations). 
+
+All I have done is refactor the code to remove the `beginning`, `change` and `duration` parameters so that each function merely manipulates `time` and does not directly tween values. I've added a comprehensive suit of unit tests to guarantee that the refactored functions work identically to the original actionscript functions when used with the parameters `beginning = 0`, `change=1`, `duration=1`. 
+
+So...
+
+```actionscript
+Math.easeInQuad = function (t, b, c, d) {
+  t /= d;
+  return c*t*t + b;
+};
+```
+
+Becomes...
+
+```js
+'in-quad' : function (time){
+  return time * time;
+}
+```
+
+## Bezier Curve based easing
+
+CSS3 transition easing curves are all based on Bezier curves. Previously I wrote a module that emulates the CSS3 transition curves but this depends upon look up tables and so depending on the number of samples being generated can have a noticable start-up cost. I'm looking into the effectiveness of using interpolation to smooth out the gaps and thus need less samples, but this type 
+of easing curve will continue to be a seperate module. Of course this module will accept the old module as a custom easing function: 
+
+```js
+var BezierEasing = require('gm-easing').Easer;
+var Easer = require('functional-easing').Easer;
+
+var css3EaseIn = new BezierEasing().using('ease-in');
+
+var easer = new Easer().using(css3EaseIn);
+
+var animation = new AnimationTimer()
+  .duration(1000)
+  .on('tick', easer(function(time){
+
+    // time has been eased using css3EaseIn
+
+  }));
+
+```
 
 ## Development and Tests
 
