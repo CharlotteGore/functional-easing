@@ -7,7 +7,6 @@ require('./raw-penner-functions.js');
 var easers = require('../penner-easing.js');
 
 easingModule = require('../index.js');
-var Bezier = require('gm-bezier');
 
 describe('Animation Easing module', function (){
 

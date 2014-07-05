@@ -1,5 +1,7 @@
 # Functional Easing
 
+[![browser support](https://ci.testling.com/charlottegore/functional-easing.png)](https://ci.testling.com/charlottegore/functional-easing)
+
 [![Build Status](https://travis-ci.org/charlottegore/functional-easing.png?branch=master)](https://travis-ci.org/charlottegore/functional-easing)
 
 A functional, highly generic easing provider. Works especially well with [Animation Timer](https://github.com/charlottegore/animation-timer) which already provides the normalised 0 to 1 time elapsed input value used by this module (in addition to providing easy looping, bouncing, rewinding and pausing of animations. Check it out! It's cool!)
@@ -51,6 +53,7 @@ var destination = new Vector2D(200,100);
 // make a new easer. Wrap our tick handler with easer..
 var animation = new AnimationTimer()
   .duration('5s')
+  // here we wrap our tick handler with our easer..
   .on('tick', easer(function(time){
     // every tick, this function will be called and 'time' will be already 'eased'
     var tweenedVector = Vector2D.lerp(origin, destination, time);
@@ -71,7 +74,7 @@ var Easer = require('functional-easing').Easer;
 var easer = new Easer();
 ```
 
-### Easer.using(preset)
+### Easer.using('preset')
 
 Generates an easing function from one of the presets. The options are...
 
@@ -85,6 +88,8 @@ Generates an easing function from one of the presets. The options are...
 - `in-back`, `out-back`, `in-out-back` - configurable
 - `in-elastic`, `out-elasic`, `in-out-elastic` - configurable
 - `in-bounce`, `out-bounce`, `in-out-bounce`
+
+Returns an `easingFunction`.
 
 ```js
 var easer = new Easer().using('in-out-sine');
@@ -106,7 +111,7 @@ var easer =
 
 ### easingFunction(time)
 
-Easing functions can be used procedurally by passing a time value, in which case it simply returns the eased value.
+Easing functions can be used procedurally by passing a time value between 0 - 1, in which case it simply returns the eased value.
 
 ```js
 var easer = new Easer().using('in-expo');
@@ -119,18 +124,18 @@ easer(1); // returns 1
 ### easingFunction(function)
 
 Easing functions can be used functionally. When passed a function `func`, it returns another function which when called will pass
-the output of the easing function as the first parameter to `func`.
+the output of the easing function as the first parameter to `func`. It also passes the original unmodified `time` value.
 
 ```js
 var easer = new Easer().using('in-expo');
 
-var easingFunction = easer(function(easedTime){
+var easingFunction = easer(function(easedTime, linearTime){
   // easedTime is the output of the easing function.
-  console.log(easedTime);
+  console.log(easedTime, linearTime);
 });
 
-easingFunction(0.5); // 0.03125
-easingFunction(0.8); // 0.25000 (etc)
+easingFunction(0.5); // 0.03125, 0.5
+easingFunction(0.8); // 0.25000 (etc), 0.8
 ```
 
 ### easingFunction.withParameters( ... )

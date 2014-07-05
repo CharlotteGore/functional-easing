@@ -43,6 +43,17 @@
     "chai": "~1.9.0",
     "mocha": "~1.17.1"
   },
+  "testling" : {
+    "harness" : "mocha-bdd",
+    "files" : "test/test.js",
+    "browsers" : [
+      "ie8", "ie9", "ie10", "ie11",
+      "ff/latest", "ff/nightly",
+      "chrome/latest", "chrome/canary",
+      "opera/latest", "opera/next",
+      "safari/latest"
+    ]
+  },
   "author": "Charlotte Gore <charlotte@greenmesa.co.uk>",
   "license": "MIT",
   "bugs": {
