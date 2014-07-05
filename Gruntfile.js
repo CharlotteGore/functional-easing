@@ -11,7 +11,8 @@ module.exports = function(grunt) {
 
     jshint: {
       files: [
-      	'index.js'
+      	'index.js',
+        'penner-easing.js'
       ],
       options: {
         jshintrc: '.jshintrc'

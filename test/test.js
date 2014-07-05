@@ -404,6 +404,20 @@ describe('Animation Easing module', function (){
 
     });
 
+    it('passes the original time value as well as the eased value', function(){
+
+      var ease = new Easer().using("in-expo");
+
+      var easingFunction = ease(function(eased, original){
+
+        expect(original).to.equal(0.5);
+
+      });
+
+      easingFunction(0.5);
+
+    });
+
     it('has a using() method that accepts a function', function(){
 
       var ease = new Easer().using(function (t){ return 1 - t; });
