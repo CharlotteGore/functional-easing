@@ -2,7 +2,7 @@
 
 [![browser support](https://ci.testling.com/charlottegore/functional-easing.png)](https://ci.testling.com/charlottegore/functional-easing)
 
-[![Build Status](https://travis-ci.org/charlottegore/functional-easing.png?branch=master)](https://travis-ci.org/charlottegore/functional-easing)
+[![Build Status](https://travis-ci.org/CharlotteGore/functional-easing.png?branch=master)](https://travis-ci.org/CharlotteGore/functional-easing)
 
 A functional, highly generic easing provider. Works especially well with [Animation Timer](https://github.com/charlottegore/animation-timer) which already provides the normalised 0 to 1 time elapsed input value used by this module (in addition to providing easy looping, bouncing, rewinding and pausing of animations. Check it out! It's cool!)
 
