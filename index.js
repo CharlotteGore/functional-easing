@@ -60,6 +60,12 @@ AnimationEaser.prototype = {
 };
 
 module.exports.Easer = AnimationEaser;
+module.exports.createTween = function tweenCreator (start, end){
+  var changeInValue = end - start;
+  return function (currentTime){
+    return changeInValue * currentTime + start;
+  };
+};
 
 function useFunction (fn){
   this._easer = fn;
