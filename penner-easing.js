@@ -5,7 +5,7 @@
 // numerical values so that they can be more easily and efficently used
 // as the time component in existing lerp/slerp functions.
 
-// t = t, b = 0, c = 1, d =
+// t = t, b = 0, c = 1, d = 1
 
 var outBounce, inBounce;
 
@@ -20,8 +20,8 @@ var fns = {
     return -1 * t * (t -2);
   },
   'in-out-quad' : function (t){
-    t = t / 2;
-    return (t * t) / 2;
+    if ((t/=.5) < 1) return .5*t*t;
+  		return -.5 * ((--t)*(t-2) - 1);
   },
   'in-cubic' : function (t){
     return t * t * t;
@@ -31,8 +31,8 @@ var fns = {
     return t * t * t + 1;
   },
   'in-out-cubic' : function (t){
-    t = t / 2;
-    return (t * t * t) / 2;
+    if ((t/=.5) < 1) return .5*t*t*t
+  		return .5*((t-=2)*t*t + 2);
   },
   'in-quart' : function (t){
     return t * t * t * t;
@@ -42,8 +42,8 @@ var fns = {
     return -1 * (t * t * t * t - 1);
   },
   'in-out-quart' : function (t){
-    t = t / 2;
-    return (t * t * t * t) / 2;
+    if ((t/=.5) < 1) return .5*t*t*t*t;
+  	return -.5 * ((t-=2)*t*t*t - 2);
   },
   'in-quint' : function (t){
     return t * t * t * t * t;
@@ -53,8 +53,8 @@ var fns = {
     return (t * t * t * t * t + 1);
   },
   'in-out-quint' : function (t){
-    t = t / 2;
-    return (t * t * t * t * t) / 2;
+    if ((t/=.5) < 1) return .5*t*t*t*t*t;
+  	return .5*((t-=2)*t*t*t*t + 2);
   },
   'in-sine' : function (t){
     return -1 * Math.cos(t * (Math.PI / 2)) + 1;
@@ -72,8 +72,10 @@ var fns = {
     return -Math.pow(2, -10 * t) + 1;
   },
   'in-out-expo' : function (t){
-    t = t / 2;
-    return (Math.pow(2, 10 * (t - 1))) / 2;
+    if (t==0) return b;
+  	if (t==1) return 1;
+  	if ((t/=.5) < 1) return .5 * Math.pow(2, 10 * (t - 1));
+  	return .5 * (-Math.pow(2, -10 * --t) + 2);
   },
   'in-circ' : function (t){
     return -1 * (Math.sqrt(1 - t * t) - 1);
@@ -83,8 +85,9 @@ var fns = {
     return Math.sqrt(1 - t * t);
   },
   'in-out-circ' : function (t){
-    t = t / 2;
-    return (Math.sqrt(1 - t * t) - 1) / -2;
+    var c = 1;
+    if ((t/=.5) < 1) return -.5 * (Math.sqrt(1 - t*t) - 1);
+  		return .5 * (Math.sqrt(1 - (t-=2)*t) + 1);
   },
   'in-back' : function (t, overshoot){
     if (!overshoot && overshoot !== 0){
@@ -100,12 +103,9 @@ var fns = {
     return t * t * ((overshoot + 1) * t + overshoot) + 1;
   },
   'in-out-back' : function (t, overshoot){
-    if(!overshoot && overshoot !== 0){
-      overshoot = 1.70158;
-    }
-    t = t / 2;
-    overshoot = overshoot * 1.525;
-    return (t * t * ((overshoot + 1) * t - overshoot)) / 2;
+    if (overshoot == undefined) overshoot = 1.70158;
+  	if ((t/=.5) < 1) return .5*(t*t*(((overshoot*=(1.525))+1)*t - overshoot));
+  	return .5*((t-=2)*t*(((overshoot*=(1.525))+1)*t + overshoot) + 2);
   },
   'in-bounce' : function (t){
     return 1 - outBounce(1 - t);
@@ -131,39 +131,54 @@ var fns = {
     return outBounce ( t*2-1 ) * 0.5 + 1 * 0.5;
   },
   'in-elastic' : function (t, amplitude, period){
-    var offset;
-    // escape early for 0 and 1
-    if (t === 0 || t === 1) {
-      return t;
+    if (typeof period == 'undefined') {
+      period = 0;
     }
+    if (typeof amplitude == 'undefined'){
+      amplitude = 1;
+    }
+    var offset = 1.70158;
+
+    if (t == 0) return 0;
+    if (t == 1) return 1;
+
     if (!period){
-      period = 0.3;
+      period = .3;
     }
-    if (!amplitude){
+
+    if (amplitude < 1){
       amplitude = 1;
       offset = period / 4;
     } else {
-      offset = period / (Math.PI * 2.0) * Math.asin(1 / amplitude);
+      offset = period / (2*Math.PI) * Math.asin(1 / amplitude);
     }
-    t = t - 1;
-    return -(amplitude * Math.pow(2,10 * t) * Math.sin(((t - offset) * (Math.PI * 2)) / period ));
+
+    return -(amplitude*Math.pow(2,10*(t-=1)) * Math.sin( (t - offset) * (Math.PI * 2) / period));
   },
   'out-elastic' : function (t, amplitude, period){
-    var offset;
-    // escape early for 0 and 1
-    if (t === 0 || t === 1) {
-      return t;
+    if (typeof period == 'undefined') {
+      period = 0;
     }
+    if (typeof amplitude == 'undefined'){
+      amplitude = 1;
+    }
+    var offset = 1.70158;
+
+    if (t == 0) return 0;
+    if (t == 1) return 1;
+
     if (!period){
-      period = 0.3;
+      period = .3;
     }
-    if (!amplitude){
+
+    if (amplitude < 1){
       amplitude = 1;
       offset = period / 4;
     } else {
-      offset = period / (Math.PI * 2.0) * Math.asin(1 / amplitude);
+      offset = period / (2*Math.PI) * Math.asin(1 / amplitude);
     }
-    return amplitude * Math.pow(2,-10 * t) * Math.sin( (t - offset) * ( Math.PI * 2 ) / period ) + 1;
+
+    return amplitude * Math.pow(2, -10 * t) * Math.sin( (t - offset) * (Math.PI * 2) / period ) + 1;
   },
   'in-out-elastic' : function (t, amplitude, period){
     var offset;

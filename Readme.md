@@ -12,14 +12,14 @@ A functional, highly generic easing provider. Works especially well with [Animat
 - Supports custom easing functions.
 - Can be used functionally or procedurally
 - Takes linear time progressed value of 0 to 1 as input and outputs only the eased time value.
-- Designed to providing easing for any interpolation/tween functions that take a normalised time value as input. 
+- Designed to providing easing for any interpolation/tween functions that take a normalised time value as input.
 - Covered by tests.
 
 ## Built in Easing functions
 
 All easing functions support in, out and in-out.
 
-- `cubic` 
+- `cubic`
 - `quad`
 - `quart`
 - `quint`
@@ -102,7 +102,7 @@ Wraps external, custom easing functions.
 Returns an `easingFunction`.
 
 ```js
-var easer = 
+var easer =
   new Easer()
     .using(function(time){ return doSomethingWithTime(time); });
 ```
@@ -119,7 +119,7 @@ var easer = new Easer().using('in-expo');
 easer(0.5); // returns 0.03125
 easer(0); // returns 0
 easer(1); // returns 1
-``` 
+```
 
 ### easingFunction(function)
 
@@ -141,7 +141,7 @@ easingFunction(0.8); // 0.25000 (etc), 0.8
 ### easingFunction.withParameters( ... )
 
 Whether used functionally or procedurally, you can bind additional parameters to be *appended* to the parameters passed to easing functions. Time is always the first
-parameter to be passed. 
+parameter to be passed.
 
 The primary use for this is for configuring the `back` and `elastic` easing functions, but it also helps support custom functions.
 
@@ -177,9 +177,9 @@ easingFunction(0.5); // 1
 
 ## Credits
 
-All easing functions were refactored using information from [Robert Penner's easing website](http://www.robertpenner.com/easing/), Actionscript code from [Gizma](http://gizma.com/easing/) and Elastic/Back and Bounce code from [dZone](http://www.dzone.com/snippets/robert-penner-easing-equations). 
+All easing functions were refactored using information from [Robert Penner's easing website](http://www.robertpenner.com/easing/), Actionscript code from [Gizma](http://gizma.com/easing/) and Elastic/Back and Bounce code from [dZone](http://www.dzone.com/snippets/robert-penner-easing-equations).
 
-All I have done is refactor the code to remove the `beginning`, `change` and `duration` parameters so that each function merely manipulates `time` and does not directly tween values. I've added a comprehensive suit of unit tests to guarantee that the refactored functions work identically to the original actionscript functions when used with the parameters `beginning = 0`, `change=1`, `duration=1`. 
+All I have done is refactor the code to remove the `beginning`, `change` and `duration` parameters so that each function merely manipulates `time` and does not directly tween values. I've added a comprehensive suit of unit tests to guarantee that the refactored functions work identically to the original actionscript functions when used with the parameters `beginning = 0`, `change=1`, `duration=1`.
 
 So...
 
@@ -200,8 +200,8 @@ Becomes...
 
 ## Bezier Curve based easing
 
-CSS3 transition easing curves are all based on Bezier curves. Previously I wrote a module that emulates the CSS3 transition curves but this depends upon look up tables and so depending on the number of samples being generated can have a noticable start-up cost. I'm looking into the effectiveness of using interpolation to smooth out the gaps and thus need less samples, but this type 
-of easing curve will continue to be a seperate module. Of course this module will accept the old module as a custom easing function: 
+CSS3 transition easing curves are all based on Bezier curves. Previously I wrote a module that emulates the CSS3 transition curves but this depends upon look up tables and so depending on the number of samples being generated can have a noticable start-up cost. I'm looking into the effectiveness of using interpolation to smooth out the gaps and thus need less samples, but this type
+of easing curve will continue to be a seperate module. Of course this module will accept the old module as a custom easing function:
 
 ```js
 var BezierEasing = require('gm-easing').Easer;
@@ -223,21 +223,8 @@ var animation = new AnimationTimer()
 
 ## Development and Tests
 
-Pretty standard npm/grunt/browserify development stack here. 
-
-Clone the repo, `npm install -g grunt-cli` if you haven't already, then installed the dependencies once:
 ```sh
-$ npm install
-```
-
-To run the tests:
-```sh
-$ grunt test
-```
-
-Or you can 
-```
-$ grunt watch
+./node_modules/mocha/bin/mocha
 ```
 
 ## License
